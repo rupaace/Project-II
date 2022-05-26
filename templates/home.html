@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <div class="slider-area ">
+        <!-- Mobile Menu -->
+        <div class="slider-active" style="background-color: #8BC6EC;
+        background-image: linear-gradient(135deg, #eeaeca 0%, #94bbe9 100%);
+        ">
+            <div class="single-slider slider-height d-flex align-items-center bg-img-1">
+                <div class="container" >
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-9 col-md-10">
+                            <div class="hero__caption">
+                                <h1>Find the most exciting startup jobs</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Search Box -->
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <!-- form -->
+                            <form id="job-main-form" method="get" action="{% url 'jobs:searh' %}" class="job-main-form">
+                                <div class="controls" style="color: black;">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="profession">Position</label>
+                                                <input type="text" id="profession" name="position"
+                                                       placeholder="Position you are looking for" class="form-control" style="color: black">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="location">Location</label>
+                                                <input type="text" id="location" name="location"
+                                                       placeholder="Any particular location?" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" >
+                                            <button type="submit"
+                                                    class="btn job-main-form__button">
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+    <section class="featured-job-area feature-padding">
+        <div class="container">
+            <!-- Section Tittle -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle text-center">
+                        <span>Recent Job</span>
+                        <h2>Featured Jobs</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    {% for job in jobs %}
+                    <!-- single-job-content -->
+                    <div class="single-job-items mb-30">
+                        <div class="job-items">
+                            <div class="job-tittle">
+                                <a href="{% url 'jobs:jobs-detail' job.id %}"><h4>{{ job.title }}</h4></a>
+                                <ul>
+                                    <li>{{ job.company_name }}</li>
+                                    <li><i class="fas fa-map-marker-alt"></i>{{ job.location }}</li>
+                                    <li> Rs. {{ job.salary }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="items-link f-right">
+                            {% if job.type == '1' %}
+                            <a href="">Full Time</a>
+                                    {% elif job.type == '2' %}
+                                    <a href="">Part Time</a>
+                                    {% else %}
+                                    <a href="">Internship</a>
+
+                                    {% endif %}
+                                    {% if job.filled %}
+                                    <span><b>FullFilled</b></span>
+                                    {% else %}
+                            <span>{{ job.last_date }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- single-job-content -->
+                    {% endfor %}
+                    
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="browse-btn2 text-center mt-50">
+                            <a href="{% url 'jobs:jobs' %}" class="border-btn2">Browse All Jobs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </section>
+
+    <!-- Our Services Start -->
+    <div class="our-services section-pad-t10 pt-150 pb-150 " style="background:#F2F2F2">
+        <div class="container">
+            <!-- Section Tittle -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle text-center">
+                        <span>FEATURED TOURS Packages</span>
+                        <h2>Browse Top Categories </h2>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row d-flex justify-contnet-center">
+                {% for job in jobs %}
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-services text-center mb-30">
+                        <div class="services-ion">
+                            <span class="flaticon-tour"></span>
+                        </div>
+                        <div class="services-cap">
+                           <h5><a href="">{{job.category}}</a></h5>
+                            <span>(6)</span>
+                        </div>
+                    </div>
+                </div>{% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="browse-btn2 text-center mt-50">
+                        <a href="{% url 'jobs:jobs' %}" class="border-btn2">Browse All Sectors</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="apply-process-area apply-bg pt-150 pb-150" style="background:#1f2b7b" >
+        <div class="container">
+            <!-- Section Tittle -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle white-text text-center">
+                        <span>Apply process</span>
+                        <h2> How it works</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- Apply Process Caption -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-process text-center mb-30">
+                        <div class="process-ion">
+                            <span class="flaticon-search"></span>
+                        </div>
+                        <div class="process-cap">
+                           <h5>1. Search a job</h5>
+                           <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-process text-center mb-30">
+                        <div class="process-ion">
+                            <span class="flaticon-curriculum-vitae"></span>
+                        </div>
+                        <div class="process-cap">
+                           <h5>2. Apply for job</h5>
+                           <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-process text-center mb-30">
+                        <div class="process-ion">
+                            <span class="flaticon-tour"></span>
+                        </div>
+                        <div class="process-cap">
+                           <h5>3. Get your job</h5>
+                           <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+
+
+</main>
+
+{% endblock %} 

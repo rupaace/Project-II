@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated and request.user.role == 'employer' %}
+    
+
+
+
+{% endif %}
+{% endblock %}
